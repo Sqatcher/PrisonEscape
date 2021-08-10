@@ -12,6 +12,7 @@ public class EndScreen : MonoBehaviour
 	private void Start()
 	{
 		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.Confined;
 
 		float gameTime;
 		int min;
@@ -25,6 +26,8 @@ public class EndScreen : MonoBehaviour
 		sec = (int)(gameTime % 60f);
 		fraction = (int)((gameTime * 10) % 10);
 		timeText.text = string.Format("{0:00}:{1:00}:{2:00}", min, sec, fraction);
+
+		GetComponent<EquipmentManager>().ResetEquipment();
 
 	}
 	public void Return()

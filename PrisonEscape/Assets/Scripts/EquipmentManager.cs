@@ -7,6 +7,7 @@ public class EquipmentManager : MonoBehaviour
     static bool haveKey = false;
     static bool haveSpade = false;
     static bool haveMap = false;
+	static bool isFirstTime = true;
 	static int spawnIndex = 0;
 
 
@@ -45,5 +46,24 @@ public class EquipmentManager : MonoBehaviour
 	public int SpawnIndex()
 	{
 		return spawnIndex;
+	}
+
+	public void ChangeFirstTime(bool index)
+	{
+		isFirstTime = index;
+	}
+
+	public bool FirstTime()
+	{
+		return isFirstTime;
+	}
+
+	public void ResetEquipment()
+	{
+		haveKey = false;
+		haveSpade = false;
+		haveMap = false;
+		isFirstTime = true;
+		spawnIndex = 0;
 	}
 }

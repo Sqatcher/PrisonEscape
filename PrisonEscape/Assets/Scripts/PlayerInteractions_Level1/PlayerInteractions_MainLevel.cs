@@ -27,7 +27,6 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
     public GameObject tunnelEntry;
 
     static bool isTunnelDug = false;
-    static bool firstTime = true;
 
     string firstInfo = "Goal: Escape from prison";
     static int doorThreeTries;
@@ -47,19 +46,21 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
             tunnelEntry.GetComponent<MeshRenderer>().enabled = true;
         }
 
-        if (firstTime)
+        if (equipmentObject.GetComponent<EquipmentManager>().FirstTime())
 		{
-            Invoke("FirstTime", 0.5f);
+            Invoke("FirstTimeTalk", 0.5f);
 
             doorThreeTries = 0;
-            firstTime = false;
+            userInterface.GetComponent<Timer>().ResetTime();
+            userInterface.GetComponent<Timer>().CountTime(true);
+            equipmentObject.GetComponent<EquipmentManager>().ChangeFirstTime(false);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        haveKey = equipmentObject.transform.GetComponent<EquipmentManager>().Key();
+        haveKey = equipmentObject.GetComponent<EquipmentManager>().Key();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -127,7 +128,7 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
         equipment.ChangeSpawnIndex(index);
     }
 
-    void FirstTime()
+    void FirstTimeTalk()
 	{
         userInterface.GetComponent<UIBehaviour>().Talk(firstInfo, 0, 0, 255);
     }

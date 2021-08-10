@@ -26,6 +26,11 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startTime == 0)
+        {
+            startTime = Time.time;
+        }
+
         if (countTime)
         {
             gameTime = Time.time - startTime;
@@ -45,4 +50,9 @@ public class Timer : MonoBehaviour
     {
         return Time.time - startTime;
     }
+
+    public void ResetTime()
+	{
+        startTime = 0f;
+	}
 }
