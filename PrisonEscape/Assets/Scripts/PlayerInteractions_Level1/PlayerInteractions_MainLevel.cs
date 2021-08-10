@@ -30,6 +30,7 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
     static bool firstTime = true;
 
     string firstInfo = "Goal: Escape from prison";
+    static int doorThreeTries;
     //eq:
     bool haveKey = false;
 
@@ -50,6 +51,7 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
 		{
             Invoke("FirstTime", 0.5f);
 
+            doorThreeTries = 0;
             firstTime = false;
         }
     }
@@ -77,8 +79,19 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
                 }
                 if (hit.transform.name == towerDoorName3)
                 {
+                    /*
                     ChangeSpawnIndex(outSpawnIndex3);
                     SceneManager.LoadScene(currentScene + 3);
+                    */
+                    if (doorThreeTries < 4)
+                    {
+                        userInterface.GetComponent<UIBehaviour>().Talk("Don't go in there", 0f, 0f, 1f);
+                        doorThreeTries++;
+                    }
+                    else
+                    {
+                        userInterface.GetComponent<UIBehaviour>().Talk("I said don't go in there", 0.2f, 0f, 0.8f);
+                    }
                 }
                 if (hit.transform.name == towerDoorName4)
                 {
@@ -86,9 +99,16 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
                     SceneManager.LoadScene(currentScene + 4);
                 }
 
-                if (hit.transform.gameObject == tunnelEntry && equipmentObject.GetComponent<EquipmentManager>().Key() && isTunnelDug)
+                if (hit.transform.gameObject == tunnelEntry && isTunnelDug)
                 {
-                    SceneManager.LoadScene(7);
+                    if (equipmentObject.GetComponent<EquipmentManager>().Key())
+                    {
+                        SceneManager.LoadScene(7);
+                    }
+					else
+					{
+                        userInterface.GetComponent<UIBehaviour>().Talk("It's locked", 0f, 0f, 1f);
+                    }
                 }
 
                 if (hit.transform.gameObject == tunnelEntry && equipmentObject.GetComponent<EquipmentManager>().Spade())
@@ -109,6 +129,6 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
 
     void FirstTime()
 	{
-        userInterface.GetComponent<UIBehaviour>().Talk(firstInfo, 255, 0);
+        userInterface.GetComponent<UIBehaviour>().Talk(firstInfo, 0, 0, 255);
     }
 }

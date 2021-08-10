@@ -62,12 +62,12 @@ public class UIBehaviour : MonoBehaviour
 		}
     }
 
-    public void Talk(string text, int r=170, int g=255, int b=0)
+    public void Talk(string text, float r=1f, float g=1f, float b=0f)
     {
         dialogueText.text = text;
         dialogueText.color = new Color(r, g, b);
-        Debug.Log(text);
-        Debug.Log(r);
+        //Debug.Log(text);
+        //Debug.Log(r);
 
         Invoke("ClearText", 3);
     }

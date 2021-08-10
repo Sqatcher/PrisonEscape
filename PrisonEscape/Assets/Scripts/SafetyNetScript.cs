@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SafetyNetScript : MonoBehaviour
 {
-	public GameObject player;
+	// NIE DZIALA
+
+	//public GameObject player;
 
 	private void OnTriggerEnter(Collider other)
 	{
 		Debug.Log("TRIGGER");
-		player.GetComponent<PlayerSpawn>().Spawn();
-		player.GetComponent<PlayerMovement>().SetVelocity(0f, 0f, 0f);
+
+		//player.GetComponent<PlayerMovement>().SetVelocity(0f, 0f, 0f);
+		other.GetComponent<PlayerMovement>().SetVelocity(0f, 0f, 0f);
+		//player.GetComponent<PlayerSpawn>().Spawn();
+		other.GetComponent<PlayerSpawn>().Spawn();
 	}
 }
