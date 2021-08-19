@@ -54,6 +54,7 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
             userInterface.GetComponent<Timer>().ResetTime();
             userInterface.GetComponent<Timer>().CountTime(true);
             equipmentObject.GetComponent<EquipmentManager>().ChangeFirstTime(false);
+            isTunnelDug = false;
         }
     }
 
