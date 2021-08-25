@@ -41,11 +41,6 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
-        if (isTunnelDug == true)
-		{
-            tunnelEntry.GetComponent<MeshRenderer>().enabled = true;
-        }
-
         if (equipmentObject.GetComponent<EquipmentManager>().FirstTime())
 		{
             Invoke("FirstTimeTalk", 0.5f);
@@ -55,6 +50,11 @@ public class PlayerInteractions_MainLevel : MonoBehaviour
             userInterface.GetComponent<Timer>().CountTime(true);
             equipmentObject.GetComponent<EquipmentManager>().ChangeFirstTime(false);
             isTunnelDug = false;
+        }
+
+        if (isTunnelDug == true)
+        {
+            tunnelEntry.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
